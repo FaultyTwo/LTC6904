@@ -1,0 +1,11 @@
+# Datatypes (KEYWORD1)
+
+LTC6904 KEYWORD1
+# Datatypes for public stuffs
+
+# Methods & Functions
+I2CTest KEYWORD2
+outputConfig KEYWORD2
+setOct KEYWORD2
+setDac KEYWORD2
+setFreq KEYWORD2

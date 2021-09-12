@@ -1,0 +1,22 @@
+{
+  "name": "LTC6904",
+  "keywords": "I2C, Oscillator",
+  "description": "An Arduino Library for LTC6904",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/FaultyTwo/LTC6904"
+  },
+  "authors": 
+  [
+    {
+      "name": "Chawin 'Faultytwo' Treesugol",
+      "email": "-",
+      "url": "https://github.com/FaultyTwo",
+      "maintainer": true
+    }
+  ],
+  "version": "1.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
