@@ -41,7 +41,7 @@ void LTC6904::setDac(short dac){
   firstFrame >>= 4; //shift to right 4 times
   firstFrame <<= 4; //shift to left 4 times
   firstFrame |= dac >> 6; //shift dac to right by 6 to leave only DAC9 - DAC6
-  Serial.println(firstFrame,BIN);
+  //Serial.println(firstFrame,BIN);
 
   secondFrame <<= 6; //shift to left 6 times
   secondFrame >>= 6; //shift to right 6 times
