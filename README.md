@@ -5,15 +5,15 @@ For more technical details, please refer to the [datasheet](https://www.analog.c
 
 ## How To Use The Library
 Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor like this:
-'''C
+```C
 LTC6904 clk(0); //0x16
 LTC6904 clk(1); //0x17
-'''
+```
 
 ### Necessary Function
-'''C
+```C
 setFreq(float freq, byte power)
-'''
+```
 Set frequency rate for LTC6904.
 
 Where:
@@ -22,21 +22,21 @@ power - Exponential of your frequency value (based off science notation).
 Ex. 6.83 KHz -> setFreq(6.83,3); **(6.83x10^3)**
 Ex. 12.54 MHz -> setFreq(12.54,6); **(12.54x10^6)**
 
-'''C
+```C
 setOct(byte oct)
-'''
+```
 Set 'OCT' value for LTC6904.
 *OCT should be in range of 0 to 15.
 
-'''C
+```C
 setDac(short dac)
-'''
+```
 Set 'DAC' value for LTC6904.
 *DAC should be in range of 0 to 2048.
 
-'''C
+```C
 outputConfig(byte _CNF)
-'''
+```
 Config output of LTC6904.
 
 | _CNF value  | CLK | ~CLK|
