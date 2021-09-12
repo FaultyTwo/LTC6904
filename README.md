@@ -1,7 +1,7 @@
 # LTC6904
 An Arduino Library for LTC6904, 1kHz to 68MHz I2C Programmable Oscillator.
 
-For more technical details, please refer to the [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf)
+For more technical details, please refer to the [datasheet.](https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf)
 
 ## How To Use The Library
 Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor like this:
@@ -19,8 +19,9 @@ Set frequency rate for LTC6904.
 **Where:**<br>
 - freq: Your frequency value in decimal
 - power: Exponential of your frequency value (based off science notation).
-Ex. 6.83 KHz -> setFreq(6.83,3); **(6.83x10^3)**<br>
-Ex. 12.54 MHz -> setFreq(12.54,6); **(12.54x10^6)**
+
+Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
+Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 
 ```C++
 setOct(byte oct)
@@ -31,7 +32,7 @@ Set 'OCT' value for LTC6904.<br>
 ```C++
 setDac(short dac)
 ```
-Set 'DAC' value for LTC6904.
+Set 'DAC' value for LTC6904.<br>
 **^DAC should be in range of 0 to 2048.**
 
 ```C++
