@@ -2,6 +2,7 @@
 
 LTC6904::LTC6904(bool _adr){
   adr = 0x16 | byte(_adr); //i mean.. it works!
+  Wire.begin();
 }
 
 void LTC6904::I2CTest(){
