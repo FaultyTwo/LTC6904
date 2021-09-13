@@ -14,7 +14,7 @@ LTC6904 clk(1); //0x17
 ```C++
 setFreq(float freq, byte power)
 ```
-Set frequency rate for LTC6904.
+Set frequency rate of LTC6904.
 
 **Where:**<br>
 - freq: Your frequency value in decimal
@@ -26,13 +26,13 @@ Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 ```C++
 setOct(byte oct)
 ```
-Set 'OCT' value for LTC6904.<br>
+Set 'OCT' value of LTC6904.<br>
 **^OCT should be in range of 0 to 15.**
 
 ```C++
 setDac(short dac)
 ```
-Set 'DAC' value for LTC6904.<br>
+Set 'DAC' value of LTC6904.<br>
 **^DAC should be in range of 0 to 2048.**
 
 ```C++
