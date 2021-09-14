@@ -58,6 +58,12 @@ void LTC6904::setFreq(float freq, byte power){ // should be float for precision
    * use short to save those poor bytes
    */
   float fre = freq*pow(10,power);
+  
+  if(fre < 1.039*pow(10,3)) //bs handling
+    fre = 1.039*pow(10,3); 
+  if(fre >= 68.03*pow(10,6)) //bs handling
+    fre = 68.03*pow(10,6); 
+  
   short oct = short(floor(3.322*log10(float(fre/1039.0))));
   short dac = short(round(2048-((2078.0*pow(2,10))/fre)));
 
