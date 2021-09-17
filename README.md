@@ -53,10 +53,10 @@ Config outputs of LTC6904.
 returnOct()
 ```
 Return OCT value of LTC6904.<br>
-*Return as byte (one byte).
+***Return as byte (one byte).**
 
 ```C++
 returnDac()
 ```
 Return DAC value of LTC6904.<br>
-*Return as unsigned short (two bytes, no complement).
+***Return as unsigned short (two bytes, no complement).**
