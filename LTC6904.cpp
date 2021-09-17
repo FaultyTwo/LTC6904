@@ -35,8 +35,10 @@ void LTC6904::setOct(byte oct){ //why?
 }
 
 void LTC6904::setDac(short dac){
-  if(dac > 2048) //if dac is more than 2048
-    dac = 2048;
+  if(dac >= 1024)
+  /* HIGHEST OF DAC IS 10-BIT!
+   * 2047 IS 11-BIT! THAT'S A DISASTER WAITING TO HAPPEN YOU DUMB FUCK! */
+    dac = 1023;
   if(dac < 0) //if dac is in negative
     dac = 0;
   firstFrame >>= 4; //shift to right 4 times
@@ -79,6 +81,20 @@ void LTC6904::setFreq(float freq, byte power){ // should be float for precision
   write(); //do your thing
 }
 
+byte LTC6904::returnOct(){
+  return firstFrame >> 4; //return shift left four times (OCT value)
+}
+
+unsigned short LTC6904::returnDac(){
+  byte firstDac, secondDac;
+  firstDac = firstFrame << 4; //only wanted OCT 9 - OCT 6
+  firstDac >>= 4; //reset it back to its position
+  secondDac = (secondFrame >> 2) << 2; //only wanted OCT 5 - OCT 0, no CNF
+  unsigned short res = short(((firstDac << 8) | secondDac) >> 2);
+  /* just making sure it's in unsigned short
+   * yes, im that paranoid */
+  return res;
+}
 void LTC6904::write(){
   Wire.beginTransmission(adr);
   Wire.write(firstFrame);

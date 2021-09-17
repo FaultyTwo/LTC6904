@@ -9,3 +9,5 @@ outputConfig KEYWORD2
 setOct KEYWORD2
 setDac KEYWORD2
 setFreq KEYWORD2
+returnDac KEYWORD2
+returnOct KEYWORD2

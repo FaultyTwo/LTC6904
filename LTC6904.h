@@ -12,6 +12,8 @@ class LTC6904{
     void setFreq(float freq, byte power); //allow some powering for advacned config
     void setOct(byte oct);
     void setDac(short dac);
+    byte returnOct(); //why the hell does anyone need this?
+    unsigned short returnDac(); //why do you need this again?
   private:
     void write();
     byte CNF = 0x00; //CNF condition

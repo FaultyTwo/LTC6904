@@ -33,7 +33,7 @@ Set 'OCT' value of LTC6904.<br>
 setDac(short dac)
 ```
 Set 'DAC' value of LTC6904.<br>
-**^DAC should be in range of 0 to 2048.**
+**^DAC should be in range of 0 to 1023.**
 
 ```C++
 outputConfig(byte _CNF)
@@ -48,3 +48,15 @@ Config outputs of LTC6904.
 | 0x03  | Powered-Down | Powered-Down |
 
 ***Beyond than 0x03 will set output back to 0x00**
+
+```C++
+returnOct()
+```
+Return OCT value of LTC6904.<br>
+*Return as byte (one byte).
+
+```C++
+returnDac()
+```
+Return DAC value of LTC6904.<br>
+*Return as unsigned short (two bytes, no complement).
