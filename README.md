@@ -12,7 +12,7 @@ LTC6904 clk(1); //0x17
 
 ## Functions
 ```C++
-setFreq(float freq, byte power)
+void setFreq(float freq, byte power)
 ```
 Set frequency rate of LTC6904.
 
@@ -24,19 +24,19 @@ Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
 Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 
 ```C++
-setOct(byte oct)
+void setOct(byte oct)
 ```
 Set 'OCT' value of LTC6904.<br>
 **^OCT should be in range of 0 to 15.**
 
 ```C++
-setDac(short dac)
+void setDac(short dac)
 ```
 Set 'DAC' value of LTC6904.<br>
 **^DAC should be in range of 0 to 1023.**
 
 ```C++
-outputConfig(byte _CNF)
+void outputConfig(byte _CNF)
 ```
 Config outputs of LTC6904.
 
@@ -50,13 +50,13 @@ Config outputs of LTC6904.
 ***Beyond than 0x03 will set output back to 0x00**
 
 ```C++
-returnOct()
+byte returnOct()
 ```
 Return OCT value of LTC6904.<br>
 ***Return as byte (one byte).**
 
 ```C++
-returnDac()
+unsigned short returnDac()
 ```
 Return DAC value of LTC6904.<br>
 ***Return as unsigned short (two bytes, no complement).**
