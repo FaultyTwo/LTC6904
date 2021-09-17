@@ -95,6 +95,7 @@ unsigned short LTC6904::returnDac(){
    * yes, im that paranoid */
   return res;
 }
+
 void LTC6904::write(){
   Wire.beginTransmission(adr);
   Wire.write(firstFrame);
