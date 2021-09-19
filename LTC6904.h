@@ -13,6 +13,7 @@ class LTC6904{
     void setOct(byte oct);
     void setDac(short dac);
     byte returnOct(); //why the hell does anyone need this?
+    byte returnCNF(); //ugh
     unsigned short returnDac(); //why do you need this again?
   private:
     void write();

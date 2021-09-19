@@ -96,6 +96,10 @@ unsigned short LTC6904::returnDac(){
   return res;
 }
 
+byte LTC6904::returnCNF(){
+  return CNF; //why?
+}
+
 void LTC6904::write(){
   Wire.beginTransmission(adr);
   Wire.write(firstFrame);

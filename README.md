@@ -60,3 +60,9 @@ unsigned short returnDac()
 ```
 Return DAC value of LTC6904.<br>
 ***Return as unsigned short (two bytes, no complement).**
+
+```C++
+byte returnCNF()
+```
+Return CNF value of LTC6904.<br>
+***Return as byte (one byte).**
