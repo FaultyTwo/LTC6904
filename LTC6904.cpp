@@ -1,7 +1,7 @@
 #include "LTC6904.h"
 
 LTC6904::LTC6904(bool _adr){
-  adr = 0x16 | byte(_adr); //i mean.. it works!
+  adr = 0x16 | uint8_t(_adr); //i mean.. it works!
   Wire.begin();
 }
 
@@ -13,7 +13,7 @@ void LTC6904::I2CTest(){
   write();
 }
 
-void LTC6904::outputConfig(byte _CNF){ // pass
+void LTC6904::outputConfig(uint8_t _CNF){ // pass
   CNF = _CNF;
   if(CNF >= 0x04) //check for illegal conditions
     CNF = 0x00; //reset back to default mode
@@ -23,7 +23,7 @@ void LTC6904::outputConfig(byte _CNF){ // pass
   write();
 }
 
-void LTC6904::setOct(byte oct){ //why?
+void LTC6904::setOct(uint8_t oct){ //why?
   if(oct > 15) //if oct were set in illegal range
     oct = 15; //just set it to the max range (15)
   if(oct < 0)
@@ -53,7 +53,7 @@ void LTC6904::setDac(short dac){
   write(); //do your thing
 }
 
-void LTC6904::setFreq(float freq, byte power){ // should be float for precision
+void LTC6904::setFreq(float freq, uint8_t power){ // should be float for precision
   /* Time to do some meth
    * OCT = 3.322(log(freq/1039));
    * DAC = 2048 * 2078 * 2^10 / f;
@@ -81,12 +81,12 @@ void LTC6904::setFreq(float freq, byte power){ // should be float for precision
   write(); //do your thing
 }
 
-byte LTC6904::returnOct(){
+uint8_t LTC6904::returnOct(){
   return firstFrame >> 4; //return shift left four times (OCT value)
 }
 
 unsigned short LTC6904::returnDac(){
-  byte firstDac, secondDac;
+  uint8_t firstDac, secondDac;
   firstDac = firstFrame << 4; //only wanted OCT 9 - OCT 6
   firstDac >>= 4; //reset it back to its position
   secondDac = (secondFrame >> 2) << 2; //only wanted OCT 5 - OCT 0, no CNF
@@ -96,7 +96,7 @@ unsigned short LTC6904::returnDac(){
   return res;
 }
 
-byte LTC6904::returnCNF(){
+uint8_t LTC6904::returnCNF(){
   return CNF; //why?
 }
 

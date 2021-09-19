@@ -8,19 +8,19 @@ class LTC6904{
   public:
     LTC6904(bool _adr);
     void I2CTest(); //test if you connect I2C device properly
-    void outputConfig(byte _CNF); //set CNF flag, very useful
-    void setFreq(float freq, byte power); //allow some powering for advacned config
-    void setOct(byte oct);
+    void outputConfig(uint8_t _CNF); //set CNF flag, very useful
+    void setFreq(float freq, uint8_t power); //allow some powering for advacned config
+    void setOct(uint8_t oct);
     void setDac(short dac);
-    byte returnOct(); //why the hell does anyone need this?
-    byte returnCNF(); //ugh
+    uint8_t returnOct(); //why the hell does anyone need this?
+    uint8_t returnCNF(); //ugh
     unsigned short returnDac(); //why do you need this again?
   private:
     void write();
-    byte CNF = 0x00; //CNF condition
-    byte adr; //I2C Address
-    byte firstFrame; //first byte transmission
-    byte secondFrame; //second byte transmission
+    uint8_t CNF = 0x00; //CNF condition
+    uint8_t adr; //I2C Address
+    uint8_t firstFrame; //first byte transmission
+    uint8_t secondFrame; //second byte transmission
 };
 
 /* what does LTC6904 functionality needs
