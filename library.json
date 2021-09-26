@@ -5,7 +5,7 @@
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/FaultyTwo/LTC6904"
+    "url": "https://github.com/FaultyTwo/LTC6904-arduino-lib"
   },
   "authors": 
   [
@@ -16,7 +16,7 @@
       "maintainer": true
     }
   ],
-  "version": "1.0",
+  "version": "1.2",
   "frameworks": "arduino",
   "platforms": "*"
 }
