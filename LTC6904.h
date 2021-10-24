@@ -1,6 +1,10 @@
 #ifndef LTC6904_h_ft
 #define LTC6904_h_ft
 
+#if (ARDUINO <  100) && !defined(MPIDE)
+#error LTC6904 library requires Arduino 1.0 or later
+#endif
+
 #include "Arduino.h"
 #include "Wire.h"
 
@@ -9,7 +13,7 @@ class LTC6904{
     LTC6904(bool _adr);
     void I2CTest(); //test if you connect I2C device properly
     void outputConfig(uint8_t _CNF); //set CNF flag, very useful
-    void setFreq(float freq, uint8_t power); //allow some powering for advacned config
+    void setFreq(float freq, uint8_t power); //allow some powering for advanced config
     void setOct(uint8_t oct);
     void setDac(short dac);
     uint8_t returnOct(); //why the hell does anyone need this?
