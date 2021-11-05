@@ -1,16 +1,12 @@
 #include "LTC6904.h"
 
-LTC6904::LTC6904(bool _adr){
-  adr = 0x16 | uint8_t(_adr); //i mean.. it works!
-  Wire.begin();
+LTC6904::LTC6904(bool adr){
+  _adr = 0x16 | uint8_t(adr); //i mean.. it works!
 }
 
-void LTC6904::I2CTest(){
-  //OCT = 0 freq = 1.5k, CLK channel only
-  //if output isn't the same as this, then check your I2C bus connections
-  firstFrame = 0b00000000;
-  secondFrame = 0b00001010;
-  write();
+void LTC6904::begin(TwoWire &yourWire){
+  _wire = &yourWire;
+  _wire->begin();
 }
 
 void LTC6904::outputConfig(uint8_t _CNF){ // pass
@@ -101,8 +97,8 @@ uint8_t LTC6904::returnCNF(){
 }
 
 void LTC6904::write(){
-  Wire.beginTransmission(adr);
-  Wire.write(firstFrame);
-  Wire.write(secondFrame);
-  Wire.endTransmission();
+  _wire->beginTransmission(_adr);
+  _wire->write(firstFrame);
+  _wire->write(secondFrame);
+  _wire->endTransmission();
 }

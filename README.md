@@ -10,7 +10,19 @@ LTC6904 clk(0); //0x16
 LTC6904 clk(1); //0x17
 ```
 
+Then in the setup function of Arduino IDE:
+```C
+void setup(){
+	clk.begin();
+	...
+```
+
 ## Functions
+```C
+void begin();
+```
+Initiate LTC6904 library
+
 ```C++
 void setFreq(float freq, uint8_t power)
 ```

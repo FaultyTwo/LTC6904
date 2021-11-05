@@ -1,28 +1,25 @@
 #ifndef LTC6904_h_ft
 #define LTC6904_h_ft
 
-#if (ARDUINO <  100) && !defined(MPIDE)
-#error LTC6904 library requires Arduino 1.0 or later
-#endif
-
 #include "Arduino.h"
 #include "Wire.h"
 
 class LTC6904{
   public:
-    LTC6904(bool _adr);
-    void I2CTest(); //test if you connect I2C device properly
+    LTC6904(bool adr);
     void outputConfig(uint8_t _CNF); //set CNF flag, very useful
-    void setFreq(float freq, uint8_t power); //allow some powering for advanced config
+    void setFreq(float freq, uint8_t power); //allow some powering for advacned config
     void setOct(uint8_t oct);
     void setDac(short dac);
+    void begin(TwoWire &yourWire);
     uint8_t returnOct(); //why the hell does anyone need this?
     uint8_t returnCNF(); //ugh
     unsigned short returnDac(); //why do you need this again?
   private:
     void write();
+    TwoWire *_wire;
     uint8_t CNF = 0x00; //CNF condition
-    uint8_t adr; //I2C Address
+    uint8_t _adr; //I2C Address
     uint8_t firstFrame; //first byte transmission
     uint8_t secondFrame; //second byte transmission
 };
