@@ -1,13 +1,13 @@
 # Datatypes (KEYWORD1)
 
-LTC6904 KEYWORD1
+LTC6904	KEYWORD1
 # Datatypes for public stuffs
 
 # Methods & Functions
-outputConfig KEYWORD2
-setOct KEYWORD2
-setDac KEYWORD2
-setFreq KEYWORD2
-returnDac KEYWORD2
-returnOct KEYWORD2
-returnCNF KEYWORD2
+outputConfig	KEYWORD2
+setOct	KEYWORD2
+setDac	KEYWORD2
+setFreq	KEYWORD2
+returnDac	KEYWORD2
+returnOct	KEYWORD2
+returnCNF	KEYWORD2
