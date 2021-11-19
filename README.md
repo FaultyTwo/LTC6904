@@ -7,21 +7,22 @@ For more technical details, please refer to the [datasheet.](https://www.analog.
 Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor like this:
 ```C
 LTC6904 clk(0); //0x16
-LTC6904 clk(1); //0x17
+LTC6904 clk2(1); //0x17
 ```
 
 Then in the setup function of Arduino IDE:
 ```C
 void setup(){
 	clk.begin();
+	clk2.begin();
 	...
 ```
 
-## Functions
+## Methods
 ```C
 void begin();
 ```
-Initiate LTC6904 library
+Initiate the LTC6904 library.
 
 ```C++
 void setFreq(float freq, uint8_t power)
@@ -29,7 +30,7 @@ void setFreq(float freq, uint8_t power)
 Set frequency rate of LTC6904.
 
 **Where:**<br>
-- freq: Your frequency value in decimal
+- freq: Your frequency value in decimal.
 - power: Exponential of your frequency value (based off science notation).
 
 Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
@@ -52,7 +53,7 @@ void outputConfig(uint8_t _CNF)
 ```
 Config outputs of LTC6904.
 
-| _CNF value  | CLK | ~CLK|
+| _CNF value  | CLK | ~CLK |
 | ------------- | ------------- | ------------- |
 | 0x00  | CLK  | CLK + 180 |
 | 0x01  | OFF  | ON |
@@ -64,17 +65,14 @@ Config outputs of LTC6904.
 ```C++
 uint8_t returnOct()
 ```
-Return OCT value of LTC6904.<br>
-***Return as byte (one byte).**
+Return OCT value.<br>
 
 ```C++
 unsigned short returnDac()
 ```
-Return DAC value of LTC6904.<br>
-***Return as unsigned short (two bytes, no complement).**
+Return DAC value.<br>
 
 ```C++
 uint8_t returnCNF()
 ```
-Return CNF value of LTC6904.<br>
-***Return as byte (one byte).**
+Return CNF value.<br>

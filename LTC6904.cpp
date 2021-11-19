@@ -4,53 +4,36 @@ LTC6904::LTC6904(bool adr){
   _adr = 0x16 | uint8_t(adr); //i mean.. it works!
 }
 
-void LTC6904::begin(TwoWire &yourWire){
+void LTC6904::begin(TwoWire &yourWire = Wire){
   _wire = &yourWire;
   _wire->begin();
 }
 
-void LTC6904::outputConfig(uint8_t _CNF){ // pass
-  CNF = _CNF;
-  if(CNF >= 0x04) //check for illegal conditions
-    CNF = 0x00; //reset back to default mode
-  secondFrame >>= 2; //shift to the right by 2
-  secondFrame <<= 2; //shift to the left by 2
-  secondFrame |= CNF; //or it back
+void LTC6904::outputConfig(uint8_t CNF){ // pass
+  _CNF = CNF;
+  if(_CNF >= 0x04) //check for illegal conditions
+    _CNF = 0x00; //reset back to default mode
+  secondFrame = ((secondFrame >> 2) << 2) | _CNF;
   write();
 }
 
 void LTC6904::setOct(uint8_t oct){ //why?
-  if(oct > 15) //if oct were set in illegal range
-    oct = 15; //just set it to the max range (15)
-  if(oct < 0)
-    oct = 0; //okay, now you are just being annoying
-  firstFrame <<= 4; //shift to left 4 times
-  firstFrame >>= 4; //shift to right 4 times
-  firstFrame |= oct << 4; //go to right four time*/
+  if(oct > 15) //illegal condition
+    oct = 15;
+  firstFrame = ((firstFrame << 4) >> 4) | (oct << 4);
   write();
 }
 
-void LTC6904::setDac(short dac){
-  if(dac >= 1024)
-  /* HIGHEST OF DAC IS 10-BIT!
-   * 2047 IS 11-BIT! THAT'S A DISASTER WAITING TO HAPPEN YOU DUMB FUCK! */
+void LTC6904::setDac(unsigned short dac){
+  if(dac >= 1024) //bazinga
     dac = 1023;
-  if(dac < 0) //if dac is in negative
-    dac = 0;
-  firstFrame >>= 4; //shift to right 4 times
-  firstFrame <<= 4; //shift to left 4 times
-  firstFrame |= dac >> 6; //shift dac to right by 6 to leave only DAC9 - DAC6
-  //Serial.println(firstFrame,BIN);
-
-  secondFrame <<= 6; //shift to left 6 times
-  secondFrame >>= 6; //shift to right 6 times
-  secondFrame |= dac << 2; //shift dac to left by 2 to leave only DAC5 - DAC0
-
-  write(); //do your thing
+  firstFrame = ((firstFrame >> 4) << 4) | (dac >> 6);
+  secondFrame = ((secondFrame << 6) >> 6) | (dac << 2);
+  write();
 }
 
 void LTC6904::setFreq(float freq, uint8_t power){ // should be float for precision
-  /* Time to do some meth
+  /* "Mr whote, whee is my 20003 km/h of methe???"
    * OCT = 3.322(log(freq/1039));
    * DAC = 2048 * 2078 * 2^10 / f;
    * use short to save those poor bytes
@@ -65,16 +48,10 @@ void LTC6904::setFreq(float freq, uint8_t power){ // should be float for precisi
   short oct = short(floor(3.322*log10(float(fre/1039.0))));
   short dac = short(round(2048-((2078.0*pow(2,10))/fre)));
 
-  firstFrame = 0x00; //cleansing all values
-  secondFrame = 0x00;
-  
-  firstFrame |= oct << 4; //first, shift oct into its position
-  firstFrame |= dac >> 6; //second, shift dac to right by 6 to leave only DAC9 - DAC6
-
-  secondFrame |= dac << 2; //third, shift dac to left by 2 to leave only DAC5 - DAC0
-  secondFrame |= CNF; //last, add back CNF condition
-
-  write(); //do your thing
+  firstFrame = secondFrame = 0x00; //clease all value
+  firstFrame = (oct << 4) | (dac >> 6);
+  secondFrame = (dac << 2) | _CNF;
+  write();
 }
 
 uint8_t LTC6904::returnOct(){
@@ -83,17 +60,13 @@ uint8_t LTC6904::returnOct(){
 
 unsigned short LTC6904::returnDac(){
   uint8_t firstDac, secondDac;
-  firstDac = firstFrame << 4; //only wanted OCT 9 - OCT 6
-  firstDac >>= 4; //reset it back to its position
+  firstDac = (firstFrame << 4) >> 4;
   secondDac = (secondFrame >> 2) << 2; //only wanted OCT 5 - OCT 0, no CNF
-  unsigned short res = short(((firstDac << 8) | secondDac) >> 2);
-  /* just making sure it's in unsigned short
-   * yes, im that paranoid */
-  return res;
+  return short(((firstDac << 8) | secondDac) >> 2);
 }
 
 uint8_t LTC6904::returnCNF(){
-  return CNF; //why?
+  return _CNF; //why?
 }
 
 void LTC6904::write(){
