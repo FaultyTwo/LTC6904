@@ -15,7 +15,7 @@ LTC6904 dvc(0); //0x16
 
 void setup() {
   dvc.begin();
-  Serial.begin();
+  Serial.begin(9600);
   dvc.outputConfig(0x02); //turn off ~CLK output
   dvc.setFreq(4.0,3);
   delay(1000);
