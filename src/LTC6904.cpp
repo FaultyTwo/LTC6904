@@ -4,7 +4,7 @@ LTC6904::LTC6904(bool adr){
   _adr = 0x16 | uint8_t(adr); //i mean.. it works!
 }
 
-void LTC6904::begin(TwoWire &yourWire = Wire){
+void LTC6904::begin(TwoWire &yourWire){
   _wire = &yourWire;
   _wire->begin();
 }
