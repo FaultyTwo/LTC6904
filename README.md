@@ -4,7 +4,7 @@ An Arduino Library for LTC6904, 1kHz to 68MHz I2C Programmable Oscillator.
 For more technical details, please refer to the [datasheet.](https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf)
 
 ## How To Use The Library
-Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor like this:
+Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor method like this:
 ```C
 LTC6904 clk(0); //0x16
 LTC6904 clk2(1); //0x17
