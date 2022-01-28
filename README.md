@@ -18,6 +18,21 @@ void setup(){
 	...
 ```
 
+To use this library with other I2C ports, you can simply create a TwoWire object then parse it into the 'begin' function:
+```C
+// ESP32
+#define I2C_SDA 33
+#define I2C_SCL 32
+
+TwoWire esp = TwoWire(0);
+LTC6904 clk(0);
+
+void setup(){
+  esp.begin(I2C_SDA, I2C_SCL, 1000000);
+  clk.begin(&esp);
+}
+```
+
 ## Methods
 ```C
 void begin();
