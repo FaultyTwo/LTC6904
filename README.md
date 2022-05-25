@@ -13,7 +13,7 @@ LTC6904 clk(0); //0x16
 LTC6904 clk2(1); //0x17
 ```
 
-Then in the setup function of Arduino IDE:
+Then in the setup function:
 ```C
 void setup(){
 	clk.begin();
@@ -49,7 +49,7 @@ Set frequency rate of LTC6904.
 
 **Where:**<br>
 - freq: Your frequency value in decimal.
-- power: Exponential of your frequency value (based off science notation).
+- power: Exponent value of power of 10. (based off science notation).
 
 Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
 Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
@@ -69,7 +69,7 @@ Set 'DAC' value of LTC6904.<br>
 ```C++
 void outputConfig(uint8_t _CNF)
 ```
-Config outputs of LTC6904.
+Configure outputs of LTC6904.
 
 | _CNF value  | CLK | ~CLK |
 | ------------- | ------------- | ------------- |
@@ -83,14 +83,14 @@ Config outputs of LTC6904.
 ```C++
 uint8_t returnOct()
 ```
-Return OCT value.<br>
+Return OCT value  of LTC6904.<br>
 
 ```C++
 unsigned short returnDac()
 ```
-Return DAC value.<br>
+Return DAC value  of LTC6904.<br>
 
 ```C++
 uint8_t returnCNF()
 ```
-Return CNF value.<br>
+Return CNF value  of LTC6904.<br>
