@@ -42,6 +42,8 @@ void begin();
 ```
 Initiate the LTC6904 library.
 
+Can be configured to use other I2C ports from a 'TwoWire' object. For default I2C port, just leave the parameter blank.
+
 ```C++
 void setFreq(float freq, uint8_t power)
 ```
