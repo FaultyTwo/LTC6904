@@ -25,7 +25,7 @@ void LTC6904::setOct(uint8_t oct){ //why?
 }
 
 void LTC6904::setDac(unsigned short dac){
-  if(dac >= 1024) //bazinga
+  if(dac >= 1024)
     dac = 1023;
   firstFrame = ((firstFrame >> 4) << 4) | (dac >> 6);
   secondFrame = ((secondFrame << 6) >> 6) | (dac << 2);
@@ -52,21 +52,6 @@ void LTC6904::setFreq(float freq, uint8_t power){ // should be float for precisi
   firstFrame = (oct << 4) | (dac >> 6);
   secondFrame = (dac << 2) | _CNF;
   write();
-}
-
-uint8_t LTC6904::returnOct(){
-  return firstFrame >> 4; //return shift left four times (OCT value)
-}
-
-unsigned short LTC6904::returnDac(){
-  uint8_t firstDac, secondDac;
-  firstDac = (firstFrame << 4) >> 4;
-  secondDac = (secondFrame >> 2) << 2; //only wanted OCT 5 - OCT 0, no CNF
-  return short(((firstDac << 8) | secondDac) >> 2);
-}
-
-uint8_t LTC6904::returnCNF(){
-  return _CNF; //why?
 }
 
 void LTC6904::write(){

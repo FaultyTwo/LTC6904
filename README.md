@@ -3,22 +3,11 @@ An Arduino Library for LTC6904, 1kHz to 68MHz I2C Programmable Oscillator.
 
 For more technical details, please refer to the [datasheet.](https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf)
 
-## Pinout
-![LTC6904 Pinout](pic/ltc6904.png)
-
 ## How To Use The Library
 Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor method like this:
 ```C
 LTC6904 clk(0); //0x16
 LTC6904 clk2(1); //0x17
-```
-
-Then in the setup function:
-```C
-void setup(){
-	clk.begin();
-	clk2.begin();
-	...
 ```
 
 To use this library with other I2C ports, you can simply create a TwoWire object then parse it into the 'begin' function:
@@ -42,33 +31,33 @@ void begin();
 ```
 Initiate the LTC6904 library.
 
-Can be configured to use other I2C ports from a 'TwoWire' object. For default I2C port, just leave the parameter blank.
+Can be configured to use other I2C ports from a 'TwoWire' object.<br>
+For default I2C port, just leave the parameter blank.
 
-```C++
+```C
 void setFreq(float freq, uint8_t power)
 ```
-Set frequency rate of LTC6904.
+Set frequency value of LTC6904.
 
-**Where:**<br>
 - freq: Your frequency value in decimal.
 - power: Exponent value of power of 10. (based off science notation).
 
 Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
 Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 
-```C++
+```C
 void setOct(uint8_t oct)
 ```
-Set 'OCT' value of LTC6904.<br>
-**^OCT should be in range of 0 to 15.**
+Set 'OCT' parameter of LTC6904.<br>
+**^'DAC' shouldn't exceed 1023, otherwise will be set back to 15.**
 
-```C++
+```C
 void setDac(short dac)
 ```
-Set 'DAC' value of LTC6904.<br>
-**^DAC should be in range of 0 to 1023.**
+Set 'DAC' parameter of LTC6904.<br>
+**^'DAC' shouldn't exceed 1023, otherwise will be set back to 1023.**
 
-```C++
+```C
 void outputConfig(uint8_t _CNF)
 ```
 Configure outputs of LTC6904.
@@ -81,18 +70,3 @@ Configure outputs of LTC6904.
 | 0x03  | Powered-Down | Powered-Down |
 
 ***Beyond than 0x03 will set output back to 0x00**
-
-```C++
-uint8_t returnOct()
-```
-Return OCT value  of LTC6904.<br>
-
-```C++
-unsigned short returnDac()
-```
-Return DAC value  of LTC6904.<br>
-
-```C++
-uint8_t returnCNF()
-```
-Return CNF value  of LTC6904.<br>

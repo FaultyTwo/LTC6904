@@ -1,11 +1,5 @@
-//rewritten -> 11/20/2021
-
 #ifndef LTC6904_h_ft
 #define LTC6904_h_ft
-
-#if (ARDUINO <  100) && !defined(MPIDE)
-#error LTC6904 library requires Arduino 1.0 or later
-#endif
 
 #include "Arduino.h"
 #include "Wire.h"
@@ -18,9 +12,6 @@ class LTC6904{
     void setOct(uint8_t oct);
     void setDac(unsigned short dac);
     void begin(TwoWire &yourWire = Wire);
-    uint8_t returnOct(); 
-    uint8_t returnCNF();
-    unsigned short returnDac();
   private:
     void write();
     TwoWire *_wire;
