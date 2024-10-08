@@ -1,24 +1,24 @@
 #include "LTC6904.h"
 
-LTC6904::LTC6904(bool adr){
-  _adr = 0x16 | uint8_t(adr); //i mean.. it works!
+LTC6904::LTC6904(uint8_t adr){
+  _adr = adr;
 }
 
-void LTC6904::begin(TwoWire &yourWire){
-  _wire = &yourWire;
+void LTC6904::begin(TwoWire &wire){
+  _wire = &wire;
   _wire->begin();
 }
 
-void LTC6904::outputConfig(uint8_t CNF){ // pass
+void LTC6904::outputConfig(uint8_t CNF){
   _CNF = CNF;
-  if(_CNF >= 0x04) //check for illegal conditions
-    _CNF = 0x00; //reset back to default mode
+  if(_CNF >= 0x04)
+    _CNF = 0x00;
   secondFrame = ((secondFrame >> 2) << 2) | _CNF;
   write();
 }
 
-void LTC6904::setOct(uint8_t oct){ //why?
-  if(oct > 15) //illegal condition
+void LTC6904::setOct(uint8_t oct){ 
+  if(oct > 15)
     oct = 15;
   firstFrame = ((firstFrame << 4) >> 4) | (oct << 4);
   write();
@@ -32,17 +32,16 @@ void LTC6904::setDac(unsigned short dac){
   write();
 }
 
-void LTC6904::setFreq(float freq, uint8_t power){ // should be float for precision
-  /* "Mr whote, whee is my 20003 km/h of methe???"
+void LTC6904::setFreq(float freq, uint8_t power){
+  /*
    * OCT = 3.322(log(freq/1039));
    * DAC = 2048 * 2078 * 2^10 / f;
-   * use short to save those poor bytes
    */
   float fre = freq*pow(10,power);
   
-  if(fre < 1.039*pow(10,3)) //bs handling
+  if(fre < 1.039*pow(10,3)) //lower limit handling
     fre = 1.039*pow(10,3); 
-  if(fre >= 68.03*pow(10,6)) //bs handling
+  if(fre >= 68.03*pow(10,6)) //higher limit handling
     fre = 68.03*pow(10,6); 
   
   short oct = short(floor(3.322*log10(float(fre/1039.0))));

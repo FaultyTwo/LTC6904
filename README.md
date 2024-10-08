@@ -1,13 +1,14 @@
 # LTC6904
-An Arduino Library for LTC6904, 1kHz to 68MHz I2C Programmable Oscillator.
+Arduino Library for LTC6904, 1kHz to 68MHz I2C Programmable Oscillator.
 
 For more technical details, please refer to the [datasheet.](https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf)
 
 ## How To Use The Library
-Since LTC6904 only has two I2C addresses. To create an object, just use Boolean in the constructor method like this:
+Include the library, then simply create an object according to each device address, like this:
 ```C
-LTC6904 clk(0); //0x16
-LTC6904 clk2(1); //0x17
+#include <LTC6904.h>
+LTC6904 clk(0x16);
+LTC6904 clk2(0x17);
 ```
 
 To use this library with other I2C ports, you can simply create a TwoWire object then parse it into the 'begin' function:
@@ -17,7 +18,7 @@ To use this library with other I2C ports, you can simply create a TwoWire object
 #define I2C_SCL 32
 
 TwoWire esp = TwoWire(0);
-LTC6904 clk(0);
+LTC6904 clk(0x16);
 
 void setup(){
   esp.begin(I2C_SDA, I2C_SCL, 1000000);
@@ -37,24 +38,29 @@ For default I2C port, just leave the parameter blank.
 ```C
 void setFreq(float freq, uint8_t power)
 ```
-Set frequency value of LTC6904.
+Set frequency value of LTC6904. 
 
-- freq: Your frequency value in decimal.
-- power: Exponent value of power of 10. (based off science notation).
+<!-- are you kidding me? -->
+<p style="margin-bottom: -2px; font-weight: bold;">Where:</p> 
+- 'freq': The frequency value in decimal.
+- 'power': The exponential value by the power of 10.
 
 Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
 Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 
+**^If the value is lower than 1kHz, the value will be set back to 1kHz instead.**<br>
+**^If the value is higher than 68MHz, the value will be set back to 68MHz instead.**
+
 ```C
 void setOct(uint8_t oct)
 ```
-Set 'OCT' parameter of LTC6904.<br>
-**^'DAC' shouldn't exceed 1023, otherwise will be set back to 15.**
+Set the 'OCT' parameter.<br>
+**^'OCT' shouldn't exceed 15, otherwise will be set back to 15.**
 
 ```C
 void setDac(short dac)
 ```
-Set 'DAC' parameter of LTC6904.<br>
+Set the 'DAC' parameter.<br>
 **^'DAC' shouldn't exceed 1023, otherwise will be set back to 1023.**
 
 ```C
@@ -67,6 +73,6 @@ Configure outputs of LTC6904.
 | 0x00  | CLK  | CLK + 180 |
 | 0x01  | OFF  | ON |
 | 0x02  | ON   | OFF |
-| 0x03  | Powered-Down | Powered-Down |
+| 0x03  | Powered-down | Powered-down |
 
-***Beyond than 0x03 will set output back to 0x00**
+**^Beyond than 0x03 will set output back to 0x00**
