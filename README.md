@@ -28,7 +28,7 @@ void setup(){
 
 ## Methods
 ```C
-void begin();
+void begin(TwoWire &wire = Wire);
 ```
 Initiate the LTC6904 library.
 
@@ -55,7 +55,7 @@ Set the 'OCT' parameter.<br>
 **^'OCT' shouldn't exceed 15, otherwise will be set back to 15.**
 
 ```C
-void setDac(short dac)
+void setDac(unsigned short dac)
 ```
 Set the 'DAC' parameter.<br>
 **^'DAC' shouldn't exceed 1023, otherwise will be set back to 1023.**
