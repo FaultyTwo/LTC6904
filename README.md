@@ -73,3 +73,18 @@ Configure outputs of LTC6904.
 | 0x03  | Powered-down | Powered-down |
 
 **^Beyond than 0x03 will set output back to 0x00**
+
+```C
+uint8_t getOct()
+```
+Get the 'OCT' value
+
+```C
+unsigned short getDac()
+```
+Get the 'DAC' value
+
+```C
+uint8_t getCNF()
+```
+Get the 'CNF' value

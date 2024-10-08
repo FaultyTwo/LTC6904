@@ -53,6 +53,21 @@ void LTC6904::setFreq(float freq, uint8_t power){
   write();
 }
 
+uint8_t LTC6904::getOct(){
+  return firstFrame >> 4; //return shift left four times (OCT value)
+}
+
+unsigned short LTC6904::getDac(){
+  uint8_t firstDac, secondDac;
+  firstDac = (firstFrame << 4) >> 4;
+  secondDac = (secondFrame >> 2) << 2; //only wanted OCT 5 - OCT 0, no CNF
+  return short(((firstDac << 8) | secondDac) >> 2);
+}
+
+uint8_t LTC6904::getCNF(){
+  return _CNF;
+}
+
 void LTC6904::write(){
   _wire->beginTransmission(_adr);
   _wire->write(firstFrame);
