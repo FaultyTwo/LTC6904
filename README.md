@@ -39,14 +39,11 @@ For default I2C port, just leave the parameter blank.
 void setFreq(float freq, uint8_t power)
 ```
 Set frequency value of LTC6904. 
-
-<!-- are you kidding me? -->
-<p style="margin-bottom: -2px; font-weight: bold;">Where:</p> 
 - 'freq': The frequency value in decimal.
 - 'power': The exponential value by the power of 10.
 
-Ex. 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
-Ex. 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
+**Ex.** 6.83 KHz -> setFreq(6.83,3);<br> **(6.83x10^3)**<br>
+**Ex.** 12.54 MHz -> setFreq(12.54,6);<br> **(12.54x10^6)**
 
 **^If the value is lower than 1kHz, the value will be set back to 1kHz instead.**<br>
 **^If the value is higher than 68MHz, the value will be set back to 68MHz instead.**
